@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class Driver {
     private static WebDriver driver;
     public static WebDriver getDriver() {
@@ -36,8 +38,15 @@ public class Driver {
 
             }
         }
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         return driver;
     }
-
-
+    public void closeDriver() {
+        if(driver!=null) {
+            driver.quit();
+            driver=null;
+        }
+    }
 }
